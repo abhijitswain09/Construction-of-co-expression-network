@@ -25,9 +25,9 @@ This repository provides a comprehensive pipeline for constructing co-expression
 
 Before running the network construction pipeline, make sure you have the following tools and software installed on your system:
 
-- R (version x.x.x): A programming language for statistical computing and graphics.
-- Bioconductor (version x.x.x): A collection of R packages for bioinformatics data analysis.
-- WGCNA (version x.x.x): An R package for weighted correlation network analysis.
+- R (version >= 3.0): A programming language for statistical computing and graphics.
+- Bioconductor (version 3.8): A collection of R packages for bioinformatics data analysis.
+- WGCNA (version 1.7.2-1): An R package for weighted correlation network analysis.
 
 Make sure to update the versions with the appropriate ones you are using.
 
