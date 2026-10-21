@@ -72,3 +72,14 @@ If you wish to contribute to this project, feel free to open issues, submit pull
 Thank you for using this Co-Expression Network Construction pipeline. If you have any questions or encounter any issues, please don't hesitate to contact us.
 
 Happy network construction!
+
+
+## Nextflow workflow
+
+Run the existing WGCNA analysis through Nextflow with Conda:
+
+```bash
+nextflow run main.nf -profile conda --input expression.tsv --outdir results
+```
+
+The input matrix should follow the format expected by `WGCNA.R`. The workflow stages the input under the filename expected by the script and publishes its PDF, RData, and text outputs. Package versions are described in `environment.yml`.

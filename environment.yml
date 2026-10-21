@@ -1,0 +1,9 @@
+name: wgcna-nextflow
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - r-base=4.3
+  - bioconductor-wgcna
+  - bioconductor-deseq2
+  - r-ppcor
