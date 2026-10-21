@@ -1,4 +1,4 @@
-Gene,sample1	sample2	sample3	sample4	sample5	sample6	sample7	sample8	sample9	sample10	sample11	sample12	sample13	sample14
+Gene	sample1	sample2	sample3	sample4	sample5	sample6	sample7	sample8	sample9	sample10	sample11	sample12	sample13	sample14
 gene1	27	40	53	66	79	92	14	27	40	53	66	79	92	14
 gene2	44	57	70	83	96	18	31	44	57	70	83	96	18	31
 gene3	61	74	87	100	22	35	48	61	74	87	100	22	35	48
