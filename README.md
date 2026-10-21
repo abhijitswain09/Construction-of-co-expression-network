@@ -1,85 +1,36 @@
-Certainly! Here's the updated README with the license added to the code section:
+# Co-expression network analysis
 
-# Co-Expression Network Construction Repository
+This repository runs the existing WGCNA and partial-correlation analysis through a Nextflow DSL2 workflow. The workflow makes the input matrix, selected sample columns, resource limits, and output directory configurable while keeping the R analysis in a separate script.
 
-Welcome to the Co-Expression Network Construction repository! This repository contains the scripts and documentation for constructing co-expression networks from gene expression data. Co-expression networks provide valuable insights into the relationships between genes and can help identify functionally related gene modules.
+## Quick start
 
-## Table of Contents
+Install Nextflow and Conda, then use the included stub profile to check the workflow graph:
 
-1. [Introduction](#introduction)
-2. [Dependencies](#dependencies)
-3. [Data](#data)
-4. [Network Construction Workflow](#network-construction-workflow)
-5. [Usage](#usage)
-6. [Results](#results)
-7. [License](#license)
-8. [Contributing](#contributing)
+```bash
+nextflow run . -profile test -stub
+```
 
-## Introduction
+Run the analysis with your data:
 
-Co-expression networks are networks where nodes represent genes, and edges represent co-expression relationships between genes. These networks are constructed from gene expression data, typically using correlation or mutual information measures to quantify the strength of co-expression.
+```bash
+nextflow run . -profile conda --input expression.tsv --sample_columns 8,14,15,5,6,7 --outdir results
+```
 
-This repository provides a comprehensive pipeline for constructing co-expression networks from gene expression data and includes preprocessing steps, network construction, and visualization.
+The matrix must be tab-delimited, contain a `Gene` column, and include the columns selected by `--sample_columns` (1-based column numbers). The default selection preserves the original script's six-sample selection. Supply at least four sample columns.
 
-## Dependencies
+## Workflow
 
-Before running the network construction pipeline, make sure you have the following tools and software installed on your system:
+```mermaid
+flowchart LR
+  A[Expression matrix] --> B[WGCNA / partial correlation]
+  B --> C[Clustering and module plots]
+  B --> D[Network tables and RData]
+```
 
-- R (version >= 3.0): A programming language for statistical computing and graphics.
-- Bioconductor (version 3.8): A collection of R packages for bioinformatics data analysis.
-- WGCNA (version 1.7.2-1): An R package for weighted correlation network analysis.
+## Configuration
 
-Make sure to update the versions with the appropriate ones you are using.
-
-## Data
-
-The gene expression data used in this analysis is not included in this repository. Please ensure you have access to the data and place it in the appropriate input directory before running the pipeline.
-
-## Network Construction Workflow
-
-The network construction pipeline consists of the following steps:
-
-1. **Data Preprocessing**: Preprocess the gene expression data, including normalization and handling missing values.
-2. **Co-Expression Measure Calculation**: Calculate the co-expression measure (e.g., correlation or mutual information) between gene pairs.
-3. **Network Construction**: Construct the co-expression network by thresholding the co-expression measures and defining edges between highly co-expressed genes.
-4. **Module Detection**: Identify gene modules or clusters in the co-expression network using methods such as clustering or community detection algorithms.
-5. **Visualization**: Visualize the co-expression network and gene modules to gain insights into the gene relationships.we can export it using Cytoscape and visualize it using cytoscape, Gephi, igraph R tool.
-6. **Ontology**: We do the gene ontology by using different ontology tools like gProfiller, Panther, agriGO, ShineyGO etc otherwise we can use the clueGO plugin of cytoscape for better visualization.
-
-## Usage
-
-To construct the co-expression network, follow these steps:
-
-1. Clone this repository to your local machine: `git clone https://github.com/abhijitswain09/Construction-of-co-expression-network.git`
-2. Place the gene expression data in the appropriate input directory.
-3. Install the required dependencies listed in the "Dependencies" section.
-4. Modify the configuration file if necessary to specify specific parameters for the analysis.
-5. Execute the network construction script: `Rscript WGCNA.R`
-6. The results will be generated in the output directory.
-
-## Results
-
-The results of the co-expression network construction and module detection will be stored in the output directory. This will include various files such as the network adjacency matrix, module assignments, and visualization plots.
+`nextflow.config` provides the Conda profile, output location, and sample-column selection. `environment.yml` defines the R packages. Use `--sample_columns` to select a different group of samples. Outputs are published under `results` by default.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-If you wish to contribute to this project, feel free to open issues, submit pull requests, or suggest improvements. We welcome your contributions!
-
-Thank you for using this Co-Expression Network Construction pipeline. If you have any questions or encounter any issues, please don't hesitate to contact us.
-
-Happy network construction!
-
-
-## Nextflow workflow
-
-Run the existing WGCNA analysis through Nextflow with Conda:
-
-```bash
-nextflow run main.nf -profile conda --input expression.tsv --outdir results
-```
-
-The input matrix should follow the format expected by `WGCNA.R`. The workflow stages the input under the filename expected by the script and publishes its PDF, RData, and text outputs. Package versions are described in `environment.yml`.
+MIT. See [licence.txt](licence.txt).
