@@ -5,5 +5,4 @@ channels:
 dependencies:
   - r-base=4.3
   - bioconductor-wgcna
-  - bioconductor-deseq2
   - r-ppcor
